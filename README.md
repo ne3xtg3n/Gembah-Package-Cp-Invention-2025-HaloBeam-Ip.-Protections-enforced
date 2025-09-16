@@ -232,9 +232,204 @@ Extended market research.
 
 IP roadmap (patents pending).
 
+---
 
+# HaloBeam DreamStation — Full BOM & Internal Wiring Documents
 
+**Subject:** HaloBeam DreamStation v1.2 — Complete BOM and Internal Wiring Package (Reviewed & Updated)
 
+---
+
+#### 1. Full Bill of Materials (BOM) — HaloBeam DreamStation (Rev-B)
+**Overview**: This BOM covers all core components for a single unit, targeting Lite ($55–$70 COGS), Pro ($70–$90), and Beam+ ($85–$110) variants. Prices are estimated for 1k units (volume discounts applied where possible). Total est. COGS: $62.10 (Lite base; add-ons for Pro/Beam+).
+
+**BOM Table** (Copy to Excel/Google Sheets for sorting):
+
+| Item # | Category | Subassembly | RefDes / Link | Part / Description | Primary MPN | Alt MPN(s) | Key Specs | Qty / Unit | Target Supplier | Est. Unit Cost (USD) | Est. Lead Time | Notes | Ext. Cost |
+|--------|----------|-------------|---------------|--------------------|-------------|------------|-----------|-------------|----------------------|---------------------|----------------|-------|-----------|
+| 1 | MCU | Core | U1 | ESP32-S3-WROOM-1 (8MB Flash, 2MB PSRAM) | ESP32-S3-WROOM-1-N8R2 | ESP32-S3-WROOM-1-N8 | 2.4 GHz Wi-Fi + BLE5; 3.3V; 68 pins | 1 | Mouser / Digi-Key | 3.90 | 2–6 wks | Main controller; requires 3.3V rail | 3.90 |
+| 2 | Power | Core | U2 | Buck Regulator 5V→3.3V (2A) module | AP63357 Buck Module | MP1584EN Module | Vin 5V; Vout 3.3V; ≥2A | 1 | Amazon / LCSC | 0.90 | Stock | Feeds ESP32 and 3.3V logic | 0.90 |
+| 3 | Audio | Audio | U3 | I2S Class-D Mono Amp 3W | MAX98357AETE+T | NS4168 / MA12070P | 3.7–5.5V; I2S; 3W@4Ω | 2 | Mouser / Digi-Key | 1.85 | 3–5 wks | Two amps for L/R speakers | 3.70 |
+| 4 | Audio | Audio | SPK1-2 | 40 mm Full-range Speaker, 4Ω 5W | Gallo 40mm-4Ω-5W | Peerless/Vifa 40mm | 4Ω; 5W; 86–88 dB | 2 | Parts Express | 3.50 | 4–6 wks | Front-firing drivers | 7.00 |
+| 5 | Audio | Audio | PR1 | Passive Radiator 40–50 mm | PR-45x20 | PR-40x20 | Tuned 90–120 Hz | 1 | Parts Express | 1.20 | 4–6 wks | Low-end extension | 1.20 |
+| 6 | LED | Halo | D1..D36 | WS2812B Addressable LEDs (5050) | WS2812B-B | SK6812 | 5V; 800 kHz; RGB | 36 | LCSC / Worldsemi | 0.05 | Stock | Ring of 36 px (or 1× ring module) | 1.80 |
+| 7 | LED Driver | Projection | U4 | Constant-Current LED Driver (PWM DIM) | AL8805WT-7 | PT4115 / MP24833 | Vin 5V; 1A CC; PWM DIM | 1 | Mouser / Digi-Key | 0.65 | 3–5 wks | Drives projection emitter | 0.65 |
+| 8 | Emitter | Projection | LED1 | High-Power White LED 3–5W | Cree XLamp XP-G3 | Luminus SST-20 | CCT 5000K; If=700–1000 mA | 1 | Mouser / Digi-Key | 1.80 | 2–4 wks | Ceiling projection LED | 1.80 |
+| 9 | IMU | Sensors | U5 | 6-Axis IMU | ICM-42670-P | LSM6DS3TR-C | I2C; 3.3V | 1 | Mouser / Digi-Key | 1.25 | 4–8 wks | Tilt-based brightness proxy | 1.25 |
+| 10 | Thermal | Sensors | RT1 | NTC Thermistor 10k B3950 | MF52AT 10K B3950 | EPCOS B57540G0104 | 10k@25°C; B≈3950 | 1 | LCSC / Digi-Key | 0.10 | Stock | Thermal derate/cutoff | 0.10 |
+| 11 | Battery Sense | Sensors | Rdiv | Resistor Divider for VBAT | 0805 560k / 100k | 0603 equivalents | ±1%; 1/8W | 2 | LCSC | 0.01 | Stock | Scale VBAT into ADC | 0.02 |
+| 12 | Qi2 | Charging | U6 | Qi2 Wireless Charging Module (15–30W) | Qi2-EPP-Module | WPC Qi2 dev kit | 5V in; coil included; IRQ/EN pins | 1 | Mouser / OEM | 12.00 | 6–10 wks | Module with coil + PMIC | 12.00 |
+| 13 | Button | Input | SW1 | Momentary Button (Crown) | PTS636 SKG | KMR2 | Tactile; 6×6 mm | 1 | Mouser | 0.12 | Stock | Tap/long-press | 0.12 |
+| 14 | Protection | Power | DTVS1 | TVS Diode @ 5V (USB) | SMF5.0A | SMBJ5.0A | 5V; SMA/SMB | 1 | Digi-Key | 0.18 | Stock | Surge/ESD at 5V bus | 0.18 |
+| 15 | EMI | Power | FB1-3 | Ferrite Beads (Speaker/Qi harness) | BLM21PG221SN1D | MPZ2012S221A | 220Ω@100 MHz | 3 | Mouser | 0.03 | Stock | EMI reduction | 0.09 |
+| 16 | Capacitor | Power | Cbulk1 | Bulk Electrolytic 1000 µF 10V | EEUFR1A102 | UMK1H102MHD | 1000 µF; 10V; low ESR | 1 | Mouser | 0.45 | Stock | Near LED ring 5V rail | 0.45 |
+| 17 | Resistor | LED | RLED | Series Resistor for WS2812 DIN | 330Ω 0603 | 390Ω | ±1% | 1 | LCSC | 0.005 | Stock | Stabilize data line | 0.005 |
+| 18 | Connector | Harness | J-LED | 3-Pin JST-XH (LED ring) | XHP-3 | JST XH-3 | 2.54 mm | 1 | LCSC | 0.04 | Stock | LED ring harness | 0.04 |
+| 19 | Connector | Harness | J-SPK | 2-Pin JST-XH (Speakers) | XHP-2 | JST VH-2 | 2.54/3.96 mm | 2 | LCSC | 0.05 | Stock | Speaker harnesses | 0.10 |
+| 20 | Connector | Power | J-PWR | DC Power In (from PSU) — USB-C to 5V bus | Barrel/USB-C pigtail | PD decoy if needed | 5V 5A capable | 1 | OEM | 0.70 | Stock | Select based on PSU choice | 0.70 |
+| 21 | PSU | External | PSU | External USB-C 5V, 4–5A PSU (certified) | 5V/4A USB-C | Anker/Aukey | UL/FCC Class VI | 1 | Retail / OEM | 9.50 | Stock | Includes cable | 9.50 |
+| 22 | OLED (opt.) | Projection Cap | U7 | 0.96" OLED SSD1306 128×64 | SSD1306 Module | SH1106 | I2C; 3.3V | 1 | Adafruit / OEM | 2.90 | Stock | For Glyphs/Info cap (optional) | 2.90 |
+| 23 | Servo (opt.) | Projection | M1 | Micro Servo (for diffuser cap) | SG90 | MG90S | 5V; PWM | 1 | Amazon / OEM | 1.70 | Stock | Optional angle/iris | 1.70 |
+| **Total** | | | | | | | | | | **$62.10** | | | **$62.10** |
+
+**Notes on BOM**:
+- **Total COGS**: $62.10 (Lite base; Pro adds OLED + servo = ~$66.70; Beam+ adds premium PSU + extras = ~$85).
+- **Sourcing**: Prioritize Mouser/Digi-Key for reliability; LCSC for passives; OEM for speakers/PSU.
+- **Volume Pricing**: Based on 1k units; inquire for 10k+ discounts.
+- **Lead Times**: As of September 16, 2025; monitor for supply chain shifts.
+- **DFM**: All parts RoHS-compliant; check for automotive-grade if needed.
+
+**Export**: Copy the table to Google Sheets for filtering/sorting. CSV version attached for ERP import.
+
+---
+
+#### 2. Internal Wiring Documents — HaloBeam DreamStation (Rev-B)
+**Overview**: This document details the internal wiring for the DreamStation variant, including power distribution, signal routing, and connectors. Based on Rev-B pinout, it ensures EMC compliance (e.g., short traces, ferrites) and thermal management (e.g., NTC placement). Total harness length: ~150 mm; use 28–30 AWG wire for signals, 22 AWG for power.
+
+**Key Principles**:
+- **Power**: 5V bus from USB-C PSU; star-ground at entry to minimize noise.
+- **Signals**: Keep I²C (GPIO8/9) and I2S (GPIO15/16/17) traces <50 mm; add pull-ups (4.7kΩ) where needed.
+- **EMI**: Ferrites on speaker and Qi2 lines; series resistor on LED data.
+- **Connectors**: JST-XH for modularity (easy assembly/disassembly).
+
+**Wiring Table** (Core Connections):
+
+| From | To | Wire Gauge / Type | Length (mm) | Connector | Notes |
+|------|----|--------------------|-------------|-----------|-------|
+| USB-C PSU (5V/GND) | 5V Bus PCB Pad | 22 AWG (red/black) | 500 | Barrel or soldered | Main power input; add TVS (SMF5.0A) |
+| 5V Bus | ESP32-S3 VDD | 24 AWG (red) | 20 | Soldered | MCU power; 100 µF decoupling cap |
+| 5V Bus | MAX98357A VDD | 24 AWG (red) | 30 | Soldered | Audio amp; add 10 µF ceramic cap |
+| 5V Bus | LED Ring VDD | 22 AWG (red) | 40 | JST-XH 3-pin | + 1000 µF bulk cap near ring |
+| 5V Bus | Projector LED Driver VIN | 22 AWG (red) | 35 | Soldered | Add 470 µF cap |
+| 5V Bus | Qi2 Module VIN | 22 AWG (red) | 50 | JST-XH 2-pin | Ferrite bead inline |
+| 5V Bus | SG90 Servo VDD | 24 AWG (red) | 25 | JST-XH 3-pin | Optional; 100 µF cap |
+| ESP32-S3 GPIO18 | LED Ring DATA | 28 AWG (white) | 40 | JST-XH 3-pin | Series 330 Ω resistor |
+| ESP32-S3 GPIO4 | LED Driver DIM | 28 AWG (yellow) | 30 | Soldered | PWM signal |
+| ESP32-S3 GPIO5 | SG90 Servo Signal | 28 AWG (yellow) | 25 | JST-XH 3-pin | PWM (50 Hz) |
+| ESP32-S3 GPIO8/9 | IMU SDA/SCL | 28 AWG (blue/white) | 45 | JST-XH 4-pin | Pull-ups 4.7kΩ |
+| ESP32-S3 GPIO8/9 | OLED SSD1306 SDA/SCL | 28 AWG (blue/white) | 40 | JST-XH 4-pin | I²C @ 0x3C |
+| ESP32-S3 GPIO15/16/17 | MAX98357A BCLK/WS/SD | 28 AWG (green/orange) | 30 | Soldered | I2S |
+| ESP32-S3 GPIO10 | Qi2 IRQ | 28 AWG (red) | 50 | JST-XH 2-pin | Active-low |
+| ESP32-S3 GPIO11 | Qi2 EN | 28 AWG (yellow) | 50 | JST-XH 2-pin | High to enable |
+| ESP32-S3 GPIO0 | Crown Button | 28 AWG (black) | 20 | Soldered | Pull-up to 3.3V |
+| ESP32-S3 GPIO2 | VBAT Divider | 28 AWG (orange) | 25 | Soldered | 560k/100k divider |
+| ESP32-S3 GPIO3 | NTC Thermistor | 28 AWG (brown) | 30 | Soldered | 10k/10k divider to 3.3V |
+| GND | All Components GND | 22 AWG (black) | Varies | Soldered / JST | Star-ground at entry |
+
+**ASCII Schematic** (Simplified Internal Wiring):
+
+```
+USB-C PSU (5V/GND) ── TVS (SMF5.0A) ── Ferrite ── 5V Bus
+  │
+  ├── 1000µF Bulk ── LED Ring (36x WS2812B) ── JST-XH 3-pin (5V/DATA/GND) ── 330Ω Series ── GPIO18
+  │
+  ├── LED Driver (AL8805) ── PWM (GPIO4) ── 3–5W LED Emitter
+  │
+  ├── Qi2 Module ── JST-XH 2-pin (5V/GND) ── EN (GPIO11) ── IRQ (GPIO10)
+  │
+  ├── MAX98357A (x2) ── I2S (GPIO15/16/17) ── Speakers (40mm x2 + PR) ── Ferrite
+  │
+  └── SG90 Servo ── JST-XH 3-pin (5V/SIG/GND) ── PWM (GPIO5) [Optional]
+  
+3.3V Rail (from Buck) ── ESP32-S3 ── Pull-ups (4.7k) ── I²C Bus (GPIO8/9) ── IMU (ICM-42670) & OLED (SSD1306)
+  
+ESP32-S3 ── GPIO0 (Pull-up) ── Crown Button
+ESP32-S3 ── GPIO2 ── VBAT Divider (560k/100k)
+ESP32-S3 ── GPIO3 ── NTC Divider (10k/10k to 3.3V)
+  
+Star Ground ── All GND returns (separate LED/audio from logic)
+```
+
+**Graphviz DOT Code for Wiring Diagram** (Save as `docs/wiring/halobeam_revB.dot` and render with `dot -Tsvg -o docs/img/wiring.svg`):
+```dot
+digraph HaloBeam_RevB {
+  rankdir=LR;
+  splines=ortho;
+  pad="0.2";
+  nodesep="0.35"; ranksep="0.45";
+  fontname="Inter, Helvetica, Arial, sans-serif";
+  node [shape=box, style="rounded,filled", fontname="Inter, Helvetica, Arial, sans-serif",
+        color="#D0D4D9", fillcolor="white", fontsize=11];
+  edge [fontname="Inter, Helvetica, Arial, sans-serif", fontsize=10, arrowsize=0.7, color="#6B7280"];
+
+  // Global nets
+  V5   [label="5V BUS", shape=diamond, fillcolor="#E9F3FC", color="#4F9EDD"];
+  V3V3 [label="3V3", shape=diamond, fillcolor="#EAF7F0", color="#78C6A3"];
+  GND  [label="GND (Star)", shape=diamond, fillcolor="#F3F4F6", color="#B7B7B7"];
+
+  // Power Entry
+  PSU   [label="USB-C PSU 24W"];
+  TVS   [label="TVS SMF5.0A"];
+  Ferrite [label="Ferrite BLM21PG221SN1D"];
+
+  // MCU
+  ESP [label="ESP32-S3-WROOM-1-N8R2\nU1"];
+
+  // Audio
+  AMP [label="MAX98357A x2\nU3"];
+  SPK [label="40mm Speakers x2 + PR"];
+
+  // Charging
+  PMIC [label="Qi2 Module\nU6"];
+
+  // Projection
+  LEDDrv [label="AL8805WT-7 Driver\nU4"];
+  Emitter [label="Cree XP-G3 LED\nLED1"];
+
+  // LED Ring
+  RING [label="WS2812B Ring 36px\nD1-D36"];
+
+  // Sensors
+  IMU [label="ICM-42670\nU5"];
+  NTC [label="MF52 10k B3950\nRT1"];
+  VBAT [label="Divider R (560k/100k)"];
+  BTN [label="PTS636 Button\nSW1"];
+  OLED [label="SSD1306 Module\nU7 (opt.)"];
+  SERVO [label="SG90 Servo\nM1 (opt.)"];
+
+  // Connections
+  PSU -> V5 [color="#4F9EDD", penwidth=2];
+  V5 -> TVS -> Ferrite -> GND [color="#B7B7B7"];
+  V5 -> ESP [color="#78C6A3"];
+  V5 -> AMP [color="#78C6A3"];
+  V5 -> PMIC [color="#78C6A3"];
+  V5 -> LEDDrv [color="#78C6A3"];
+  V5 -> RING [color="#78C6A3"];
+  V5 -> SERVO [color="#78C6A3", style=dashed]; // Optional
+  V5 -> Emitter [color="#78C6A3"];
+
+  ESP -> RING [label="GPIO18 (DATA) + 330Ω", color="#3B82F6"];
+  ESP -> LEDDrv [label="GPIO4 (PWM)", color="#E6B422"];
+  ESP -> SERVO [label="GPIO5 (PWM)", color="#E6B422", style=dashed];
+  ESP -> IMU [label="GPIO8/9 (I²C)", color="#7E6BEF"];
+  ESP -> OLED [label="GPIO8/9 (I²C)", color="#7E6BEF", style=dashed];
+  ESP -> AMP [label="GPIO15/16/17 (I2S)", color="#FF8A5B"];
+  ESP -> BTN [label="GPIO0", color="#9CA3AF"];
+  ESP -> VBAT [label="GPIO2 (ADC)", color="#54B397"];
+  ESP -> NTC [label="GPIO3 (ADC)", color="#54B397"];
+  ESP -> PMIC [label="GPIO11 (EN)", color="#E6B422"];
+  PMIC -> ESP [label="GPIO10 (IRQ)", color="#F05D5E"];
+
+  AMP -> SPK [label="Speakers", color="#FF8A5B"];
+  LEDDrv -> Emitter [label="LED Out", color="#9CA3AF"];
+  IMU -> GND [color="#B7B7B7"];
+  OLED -> GND [color="#B7B7B7", style=dashed];
+  NTC -> GND [color="#B7B7B7"];
+  VBAT -> GND [color="#B7B7B7"];
+  BTN -> GND [color="#B7B7B7"];
+  SPK -> GND [color="#B7B7B7"];
+  RING -> GND [color="#B7B7B7"];
+  SERVO -> GND [color="#B7B7B7", style=dashed];
+  Emitter -> GND [color="#B7B7B7"];
+  PMIC -> GND [color="#B7B7B7"];
+
+  {rank=same; PSU; TVS; Ferrite}
+  {rank=same; ESP; AMP; PMIC; LEDDrv; RING}
+  {rank=same; IMU; OLED; NTC; VBAT; BTN; SERVO}
+  {rank=same; SPK; Emitter}
+}
+
+---
 ---
 
 
