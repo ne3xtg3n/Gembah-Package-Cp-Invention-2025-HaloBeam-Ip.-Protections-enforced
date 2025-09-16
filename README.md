@@ -2,7 +2,7 @@
 # HaloBeam™ Investor Deck —By: Christopher Perry 2025
 ---
 1. Introduction
-HaloBeam™ — Dr3amstat The smart bedside device that uses light, sound, and design to improve sleep, focus, and wellness.
+HaloBeam™ — DreamStation The smart bedside device that uses light, sound, and design to improve sleep, focus, and wellness.
 
 ![1000022124](https://github.com/user-attachments/assets/1babace9-a98f-4624-84b0-32f4615b023e)
 
