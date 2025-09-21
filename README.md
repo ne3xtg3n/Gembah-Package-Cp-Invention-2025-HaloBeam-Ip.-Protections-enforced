@@ -60,11 +60,7 @@ Text:
 A single, elegant device that integrates light, sound, and charging.
 Seamless, wellness-driven, beautiful design.
 
-Visual: <img width="832" height="1248" alt="1000022009" src="https://github.com/user-attachments/assets/d82d636d-1cd0-414e-81bc-4fa7951d6b87" />
 
-
-
-https://github.com/user-attachments/assets/b3c64b34-7d12-49d5-a19d-24bbf6986d5f
 
 
 ---
